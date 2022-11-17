@@ -1,0 +1,25 @@
+ body{
+    background:black;
+ }
+ #canvas{
+    /* background:blue; */
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border:5px solid white;
+    max-width: 100%;
+    max-height: 100%;;
+ }
+ #player,#background,#enemy{
+    display:none;
+ }
+ #fullscreenbutton{
+   position:absolute;
+   font-size: 20px;
+   padding: 10px;
+   top:10px;
+   left:50%;
+   transform:translateX(-50%);
+
+ }

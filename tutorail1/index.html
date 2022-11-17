@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game1</title>
+    <style>
+        body
+        {
+            padding: 20px;
+        
+        }
+        .controls
+        {
+            position:absolute;
+            z-index:10;
+            top:50px;
+            left:50%;
+            transform:translateX(-50%);
+            
+
+        }
+        .controls,select,option
+        {
+          font-size:25px;  
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <canvas id="a"
+    width="400"
+    height="400"
+    style="border:2px solid #000000;"></canvas>
+    <div class ="controls">
+        <label for=""animations">choose animations</label>
+        <select id="animations"name="animations">
+            <option value=""idle">idle</option>
+            <option value="jump">jump</option>
+            <option value="fall">fall</option>
+            <option value="run">run</option>
+            <option value="dizzy">dizzy</option>
+            <option value="sit">sit</option>
+            <option value="roll">roll</option>
+            <option value="bite">bite</option>
+            <option value="ko">ko</option>
+            <option value="gethit">gethit</option>
+            <
+        </select>
+    
+    </div>
+
+    </center>
+        
+    <script src="index.js"></script>
+</body>
+</html>
