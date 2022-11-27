@@ -1,10 +1,10 @@
-#canvas{
-    border:3px solid black;
-    position:absolute;
-    background:black ;
-    top:50%;
-    left :50%;
-    transform: translate(-50%,-50%);
-    height: 700px;
-    width: 500px;
+#canvas {
+  border: 3px solid black;
+  position: absolute;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 700px;
+  width: 500px;
 }

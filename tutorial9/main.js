@@ -8,20 +8,21 @@ window.addEventListener("load", function () {
   class Game {
     constructor(width, height) {
       this.width = width;
+      //console.log("d",this.width);
       this.height = height;
       this.player = new Player(this);
-      this.input=new Inputhandler;
+      this.input = new Inputhandler();
     }
     update() {
-        this.player.update();
+      this.player.update(this.input.keys);
     }
     draw(context) {
       this.player.draw(context);
     }
   }
-  const game = new Game(canvas.widh, canvas.height);
+  const game = new Game(canvas.width, canvas.height);
   function animate() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.update();
     game.draw(ctx);
 
