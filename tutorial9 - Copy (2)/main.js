@@ -11,9 +11,8 @@ window.addEventListener("load", function () {
       this.width = width;
       //console.log("d",this.width);
       this.height = height;
-      this.groundmargin = 90;
-      this.speed = 0;
-      this.maxspeed=3;
+      this.groundmargin = 175;
+      this.speed = 3;
       this.background = new Background(this);
       console.log(this.background);
 

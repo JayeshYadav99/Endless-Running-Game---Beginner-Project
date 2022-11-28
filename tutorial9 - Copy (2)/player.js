@@ -5,7 +5,7 @@ import { Falling } from "./playerstate.js";
 export class Player {
   constructor(game) {
     this.game = game;
-    this.width = 100.5;
+    this.width =100.5 ;
     this.height = 91.3;
     this.x = 0;
     this.y = this.game.height - this.height - this.game.groundmargin;
@@ -62,7 +62,7 @@ export class Player {
   draw(context) {
     context.drawImage(
       this.image,
-      this.framex * this.width + 3, //3hr search
+      this.framex * this.width+3,//3hr search 
       this.framey * this.height,
       this.height,
       this.width,
@@ -75,10 +75,8 @@ export class Player {
   onground() {
     return this.y >= this.game.height - this.height - this.game.groundmargin;
   }
-  setState(state, speed) {
+  setState(state) {
     this.currentstate = this.states[state];
-    this.game.speed =this.maxspeed*speed; 
-    console.log(this.currentstate);
     this.currentstate.enter();
   }
 }

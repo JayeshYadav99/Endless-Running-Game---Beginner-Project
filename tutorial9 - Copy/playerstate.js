@@ -1,8 +1,5 @@
 const states = {
-  SITTING: 0,
-  RUNNING: 1,
-  JUMPING: 2,
-  FALLING: 3,
+  RUNNING:0,
 };
 class State {
   constructor(state) {
@@ -15,13 +12,13 @@ export class Sitting extends State {
     this.player = player;
   }
   enter() {
-    this.player.framex = 0;
-    this.player.maxframe = 4;
-    this.player.framey = 5;
+    // this.player.framex = 0; 
+    // this.player.maxframe = 4;
+    // this.player.framey = 5;
   }
   handleinput(input) {
     if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
-      this.player.setState(states.RUNNING, 1);
+      this.player.setState(states.RUNNING);
     }
   }
 }
@@ -37,10 +34,9 @@ export class Running extends State {
   }
   handleinput(input) {
     if (input.includes("ArrowDown")) {
-      this.player.setState(states.SITTING, 0);
+      this.player.setState(states.SITTING);
     } else if (input.includes("ArrowUp")) {
-      this.player.setState(states.JUMPING, 1);
-
+      this.player.setState(states.JUMPING);
     }
   }
 }
@@ -57,7 +53,7 @@ export class Jumping extends State {
   }
   handleinput(input) {
     if (this.player.vy > this.player.weight) {
-      this.player.setState(states.FALLING, 1);
+      this.player.setState(states.FALLING);
     }
   }
 }
@@ -72,6 +68,6 @@ export class Falling extends State {
     this.player.framey = 2;
   }
   handleinput(input) {
-    if (this.player.onground()) this.player.setState(states.RUNNING, 1);
+    if (this.player.onground()) this.player.setState(states.RUNNING);
   }
 }

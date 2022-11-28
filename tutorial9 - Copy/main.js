@@ -1,6 +1,5 @@
 import { Player } from "./player.js";
 import { Inputhandler } from "./input.js";
-import { Background } from "./background.js";
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
@@ -11,23 +10,15 @@ window.addEventListener("load", function () {
       this.width = width;
       //console.log("d",this.width);
       this.height = height;
-      this.groundmargin = 90;
-      this.speed = 0;
-      this.maxspeed=3;
-      this.background = new Background(this);
-      console.log(this.background);
-
+      this.groundmargin = 50;
       this.player = new Player(this);
-      console.log(this.player);
       this.input = new Inputhandler();
     }
     update(deltatime) {
-      this.background.update();
       this.player.update(this.input.keys, deltatime);
     }
     draw(context) {
-      this.background.draw(context);
-      this.player.draw(context);
+      this.player.draw(context) ;
     }
   }
   const game = new Game(canvas.width, canvas.height);
