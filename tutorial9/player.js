@@ -18,7 +18,7 @@ export class Player {
     this.frametimer = 0;
     this.speed = 0;
     this.weight = 1;
-    this.maxspeed = 10;
+    this.maxspeed = 5;
     this.image = document.getElementById("player");
     this.states = [
       new Sitting(this),
