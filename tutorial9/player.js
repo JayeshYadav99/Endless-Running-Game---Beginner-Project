@@ -2,6 +2,7 @@ import { Sitting } from "./playerstate.js";
 import { Jumping } from "./playerstate.js";
 import { Running } from "./playerstate.js";
 import { Falling } from "./playerstate.js";
+import { Rolling } from "./playerstate.js";
 export class Player {
   constructor(game) {
     this.game = game;
@@ -18,18 +19,20 @@ export class Player {
     this.frametimer = 0;
     this.speed = 0;
     this.weight = 1;
-    this.maxspeed = 5;
+    this.maxspeed = 7; //speed
     this.image = document.getElementById("player");
     this.states = [
       new Sitting(this),
       new Running(this),
       new Jumping(this),
       new Falling(this),
+      new Rolling(this),
     ];
     this.currentstate = this.states[0];
     this.currentstate.enter();
   }
   update(input, deltatime) {
+    this.checkcollision();
     this.currentstate.handleinput(input);
 
     this.x += this.speed;
@@ -60,6 +63,8 @@ export class Player {
   }
 
   draw(context) {
+    if (this.game.debug)
+      context.strokeRect(this.x, this.y, this.width, this.height);
     context.drawImage(
       this.image,
       this.framex * this.width + 3, //3hr search
@@ -77,8 +82,21 @@ export class Player {
   }
   setState(state, speed) {
     this.currentstate = this.states[state];
-    this.game.speed =this.maxspeed*speed; 
+    this.game.speed = this.maxspeed * speed;
     console.log(this.currentstate);
     this.currentstate.enter();
+  }
+  checkcollision() {
+    this.game.enemies.forEach((enemy) => {
+      if (
+        enemy.x < this.x + this.width &&
+        enemy.x + enemy.width > this.x &&
+        enemy.y < this.y + this.height &&
+        enemy.y + enemy.height > this.y
+      ) {
+        enemy.markfordeletion = true;
+        this.game.score++;
+      }
+    });
   }
 }

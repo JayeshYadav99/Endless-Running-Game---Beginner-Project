@@ -20,6 +20,7 @@ class Enemy {
     if (this.x + this.width < 0) this.markfordeletion = true;
   }
   draw(context) {
+    if(this.game.debug)context.strokeRect(this.x,this.y,this.width,this.height);
     context.drawImage(
       this.image,
       this.framex * this.width,
