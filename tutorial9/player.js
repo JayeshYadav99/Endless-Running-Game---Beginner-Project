@@ -3,6 +3,9 @@ import { Jumping } from "./playerstate.js";
 import { Running } from "./playerstate.js";
 import { Falling } from "./playerstate.js";
 import { Rolling } from "./playerstate.js";
+import { Diving } from "./playerstate.js";
+import { HIT } from "./playerstate.js";
+import { CollisionAnimation } from "./collisionanimation.js";
 export class Player {
   constructor(game) {
     this.game = game;
@@ -27,6 +30,9 @@ export class Player {
       new Jumping(this.game),
       new Falling(this.game),
       new Rolling(this.game),
+      new Diving(this.game),      
+      new HIT(this.game),      
+
     ];
     
   }
@@ -49,11 +55,13 @@ export class Player {
     //   this.vy -= 30;
     // }
     this.y += this.vy;
-    console.log(this.onground());
+    
     if (!this.onground()) this.vy += this.weight;
     else this.vy = 0;
     //sprite animations
-
+//vertical boundaries
+if(this.y>this.game.height-this.height-this.game.groundmargin)
+this.y=this.game.height-this.height-this.game.groundmargin;
     if (this.frametimer > this.frameinterval) {
       this.frametimer = 0;
       if (this.framex < this.maxframe) this.framex++;
@@ -94,8 +102,15 @@ export class Player {
         enemy.y + enemy.height > this.y
       ) {
         enemy.markfordeletion = true;
+        this.game.collisions.push(new CollisionAnimation(this.game,enemy.x+enemy.width*0.5,enemy.y+enemy.height*0.5));
+        if(this.currentstate===this.states[4]||this.currentstate===this.states[5])
+        {
         this.game.score++;
       }
+      else{
+        this.setState(6,0);
+      
+      }}
     });
   }
 }

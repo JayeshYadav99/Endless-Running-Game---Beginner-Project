@@ -25,18 +25,24 @@ window.addEventListener("load", function () {
       this.ui=new UI(this);
       this.enemies=[];
       this.particles=[];
+      this.collisions=[];
       this.maxparticles=50;
       this.enemytimer=0;
-      this.enemyinterval=600;
+      this.enemyinterval=1000;
       this.debug=0;
       this.score=0;
       this.fontcolor="black";
+      this.time=0;
+      this.gameover=false;
+      this.maxtime=10000;
+
       this.player.currentstate = this.player.states[0];
   
       this.player.currentstate.enter();
     }
     update(deltatime) {
-      
+      this.time+=deltatime;
+      if(this.time>this.maxtime)this.gameover=true;
       this.background.update();
       this.player.update(this.input.keys, deltatime);
       //handleenemies
@@ -58,10 +64,18 @@ window.addEventListener("load", function () {
         particles.update();
         if(particles.markfordeletion)this.particles.splice(index,1);
       });
-      if(this.particles.length>50)
+      if(this.particles.length>this.maxparticles)
       {
+
         this.particles=this.particles.splice(0,this.maxparticles);
       }
+      //
+      this.collisions.forEach((collision,index)=>
+      {
+        collision.update(deltatime);
+        if(collision.markfordeletion)this.collisions.splice(index,1);
+
+      });
       
     }
     draw(context) {
@@ -72,6 +86,9 @@ window.addEventListener("load", function () {
       });
       this.particles.forEach(particle=>{
         particle.draw(context);
+      });
+      this.collisions.forEach(collision=>{
+        collision.draw(context);
       });
       
       this.ui.draw(context);
@@ -93,7 +110,7 @@ window.addEventListener("load", function () {
     game.update(deltatime);
     game.draw(ctx);
 
-    requestAnimationFrame(animate);
+   if(!game.gameover) requestAnimationFrame(animate);
   }
   animate(0);
 });
