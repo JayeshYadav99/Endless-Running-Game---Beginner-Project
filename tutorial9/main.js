@@ -24,11 +24,16 @@ window.addEventListener("load", function () {
       this.input = new Inputhandler(this);
       this.ui=new UI(this);
       this.enemies=[];
+      this.particles=[];
+      this.maxparticles=50;
       this.enemytimer=0;
       this.enemyinterval=600;
       this.debug=0;
       this.score=0;
       this.fontcolor="black";
+      this.player.currentstate = this.player.states[0];
+  
+      this.player.currentstate.enter();
     }
     update(deltatime) {
       
@@ -47,6 +52,16 @@ window.addEventListener("load", function () {
         enemy.update(deltatime);
         if(enemy.markfordeletion)this.enemies.splice(this.enemies.indexOf(enemy),1);
       });
+      //handle particles
+      this.particles.forEach((particles,index)=>
+      {
+        particles.update();
+        if(particles.markfordeletion)this.particles.splice(index,1);
+      });
+      if(this.particles.length>50)
+      {
+        this.particles=this.particles.splice(0,this.maxparticles);
+      }
       
     }
     draw(context) {
@@ -54,7 +69,11 @@ window.addEventListener("load", function () {
       this.player.draw(context);
       this.enemies.forEach(enemy=>{
         enemy.draw(context);
-      })
+      });
+      this.particles.forEach(particle=>{
+        particle.draw(context);
+      });
+      
       this.ui.draw(context);
     }
     addEnemy()
@@ -62,7 +81,7 @@ window.addEventListener("load", function () {
       if(this.speed >0 && Math.random()<0.5)this.enemies.push(new GroundEnemy(this));
       else if(this.speed>0) this.enemies.push(new ClimbingEnemy(this) );
       this.enemies.push(new FlyingEnemy(this));
-      console.log(this.enemies);
+      
     }
   }
   const game = new Game(canvas.width, canvas.height);

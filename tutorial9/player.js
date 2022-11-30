@@ -19,17 +19,16 @@ export class Player {
     this.frametimer = 0;
     this.speed = 0;
     this.weight = 1;
-    this.maxspeed = 7; //speed
+    this.maxspeed = 10; //speed
     this.image = document.getElementById("player");
     this.states = [
-      new Sitting(this),
-      new Running(this),
-      new Jumping(this),
-      new Falling(this),
-      new Rolling(this),
+      new Sitting(this.game),
+      new Running(this.game),
+      new Jumping(this.game),
+      new Falling(this.game),
+      new Rolling(this.game),
     ];
-    this.currentstate = this.states[0];
-    this.currentstate.enter();
+    
   }
   update(input, deltatime) {
     this.checkcollision();
@@ -82,8 +81,8 @@ export class Player {
   }
   setState(state, speed) {
     this.currentstate = this.states[state];
-    this.game.speed = this.maxspeed * speed;
-    console.log(this.currentstate);
+    this.game.speed = this.game.maxspeed * speed;
+   // console.log(this.currentstate);
     this.currentstate.enter();
   }
   checkcollision() {

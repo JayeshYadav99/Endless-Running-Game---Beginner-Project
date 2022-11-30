@@ -1,3 +1,4 @@
+import{Dust,Fire} from './particle.js'
 const states = {
   SITTING: 0,
   RUNNING: 1,
@@ -8,105 +9,147 @@ const states = {
   HIT: 6,
 };
 class State {
-  constructor(state) {
+  constructor(state,game) {
     this.state = state;
+    this.game=game;
   }
 }
 export class Sitting extends State {
-  constructor(player) {
-    super("SITTING");
-    this.player = player;
+  constructor(game) {
+    super("SITTING",game);
+  
   }
   enter() {
-    this.player.framex = 0;
-    this.player.maxframe = 4;
-    this.player.framey = 5;
+    this.game.player.framex = 0;
+    this.game.player.maxframe = 4;
+    this.game.player.framey = 5;
   }
   handleinput(input) {
     if (input.includes("ArrowLeft") || input.includes("ArrowRight")) {
-      this.player.setState(states.RUNNING, 1);
-    } else if (input.includes("enter") && this.player.onground())
-      this.player.setState(states.ROLLING, 2);
+      this.game.player.setState(states.RUNNING, 1);
+    } else if (input.includes("Enter") && this.game.player.onground())
+      this.game.player.setState(states.ROLLING, 2);
   }
 }
 export class Running extends State {
-  constructor(player) {
-    super("RUNNNING");
-    this.player = player;
+  constructor(game) {
+    super("RUNNNING",game);
+    
   }
   enter() {
-    this.player.framex = 0;
-    this.player.maxframe = 6;
-    this.player.framey = 3;
+    this.game.player.framex = 0;
+    this.game.player.maxframe = 6;
+    this.game.player.framey = 3;
   }
   handleinput(input) {
+    this.game.particles.unshift(new Dust(this.game,this.game.player.x+this.game.player.width*0.5,this.game.player.y+this.game.player.height));
+    
     if (input.includes("ArrowDown")) {
-      this.player.setState(states.SITTING, 0);
+      this.game.player.setState(states.SITTING, 0);
     } else if (input.includes("ArrowUp")) {
-      this.player.setState(states.JUMPING, 1);
-    } else if (input.includes("Enter") && this.player.onground())
-      this.player.setState(states.ROLLING, 2);
+      this.game.player.setState(states.JUMPING, 1);
+    } else if (input.includes("Enter") && this.game.player.onground())
+      this.game.player.setState(states.ROLLING, 2);
   }
 }
 export class Jumping extends State {
-  constructor(player) {
-    super("JUMPING");
-    this.player = player;
+  constructor(game) {
+    super("JUMPING",game);
+    
   }
   enter() {
-    if (this.player.onground()) this.player.vy = -27;
-    this.player.framex = 0;
-    this.player.maxframe = 6;
-    this.player.framey = 1;
+    if (this.game.player.onground()) this.game.player.vy-=27;
+    this.game.player.framex = 0;
+    this.game.player.maxframe = 6;
+    this.game.player.framey = 1;
   }
   handleinput(input) {
-    if (this.player.vy > this.player.weight) {
-      this.player.setState(states.FALLING, 1);
+    if (this.game.player.vy > this.game.player.weight) {
+      this.game.player.setState(states.FALLING, 1);
     }
-  }
+    else if (input.includes("Enter") && !this.game.player.onground())
+    this.game.player.setState(states.ROLLING, 2);
+   else  if (input.includes("ArrowDown")) {
+      this.game.player.setState(states.SITTING, 0);
+    }
+      
+    }   
+      
 }
 export class Falling extends State {
-  constructor(player) {
-    super("FALLING");
-    this.player = player;
+  constructor(game) {
+    super("FALLING",game);
+  
   }
   enter() {
-    this.player.framex = 0;
-    this.player.maxframe = 6;
-    this.player.framey = 2;
+    this.game.player.framex = 0;
+    this.game.player.maxframe = 6;
+    this.game.player.framey = 2;
   }
   handleinput(input) {
-    if (this.player.onground()) this.player.setState(states.RUNNING, 1);
+    if (this.game.player.onground()) this.game.player.setState(states.RUNNING, 1);
   }
 }
 export class Rolling extends State {
-  constructor(player) {
-    super("ROLLING");
-    this.player = player;
+  constructor(game) {
+    super("ROLLING",game);
+    
   }
   enter() {
-    this.player.framex = 0;
-    this.player.maxframe = 6;
-    this.player.framey = 6;
+
+    this.game.player.framex = 0;
+    this.game.player.maxframe = 6;
+    this.game.player.framey = 6;
   }
   handleinput(input) {
-    if (input.includes("enter") && this.player.onground())
-      this.player.setState(states.RUNNING, 1);
-    else if (!input.includes("enter") && !this.player.onground())
-      this.player.setState(states.FALLING, 1);
+    this.game.particles.unshift(new Fire(this.game,this.game.player.x+this.game.player.width*0.6,this.game.player.y+this.game.player.height
+      ));
+    if (input.includes("ArrowRight")
+     && this.game.player.onground())
+      this.game.player.setState(states.RUNNING, 1);
+    else if (!input.includes("Enter") && !this.game.player.onground())
+      this.game.player.setState(states.FALLING, 1);
+      else if(input.includes("Enter")&& input.includes("ArrowUp")&& this.game.player.onground())
+      {
+        this.game.player.vy-=27;
+      }
+      
   }
 }
-export class diving extends State {
-  constructor(player) {
-    super("FALLING");
-    this.player = player;
-  }
-  enter() {
-    this.player.framex = 0;
-    this.player.maxframe = 6;
-    this.player.framey = 2;
-  }
-  handleinput(input) {
-    if (this.player.onground()) this.player.setState(states.RUNNING, 1);
-  }
-}
+// export class Diving extends State {
+//   constructor(game) {
+//     super("DIVING",game);
+    
+//   }
+//   enter() {
+
+//     this.game.player.framex = 0;
+//     this.game.player.maxframe = 6;
+//     this.game.player.framey = 6;
+//   }
+//   handleinput(input) {
+//     this.game.particles.unshift(new Fire(this.game,this.game.player.x+this.game.player.width*0.6,this.game.player.y+this.game.player.height
+//       ));
+//     if (input.includes("ArrowRight")
+//      && this.game.player.onground())
+//       this.game.player.setState(states.RUNNING, 1);
+//     else if (input.includes("Enter") && !this.game.player.onground())
+//       this.game.player.setState(states.ROLLING, 2);
+     
+      
+//   }
+
+// export class diving extends State {
+//   constructor(player) {
+//     super("FALLING");
+//     this.player = player;
+//   }
+//   enter() {
+//     this.player.framex = 0;
+//     this.player.maxframe = 6;
+//     this.player.framey = 2;
+//   }
+//   handleinput(input) {
+//     if (this.player.onground()) this.player.setState(states.RUNNING, 1);
+//   }
+// }

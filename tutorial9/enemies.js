@@ -20,7 +20,8 @@ class Enemy {
     if (this.x + this.width < 0) this.markfordeletion = true;
   }
   draw(context) {
-    if(this.game.debug)context.strokeRect(this.x,this.y,this.width,this.height);
+    if (this.game.debug)
+      context.strokeRect(this.x, this.y, this.width, this.height);
     context.drawImage(
       this.image,
       this.framex * this.width,
@@ -42,7 +43,7 @@ export class FlyingEnemy extends Enemy {
     this.height = 44;
     this.x = this.game.width + Math.random() * this.game.width * 0.5;
     this.y = Math.random() * this.game.height * 0.5;
-    this.speedx = Math.random()+1;
+    this.speedx = Math.random() + 1;
     this.speedy = 0;
     this.maxframe = 5;
     this.image = document.getElementById("enemy_fly");
@@ -70,32 +71,29 @@ export class GroundEnemy extends Enemy {
   }
 }
 export class ClimbingEnemy extends Enemy {
-    constructor(game)
-{
-        super();
-        this.game=game;
-        this.width=120;
-        this.height=144;
-        this.x=this.game.width;
-        this.y=Math.random()*this.game.height*0.5;
-        this.image=document.getElementById('enemy_spider_big');
-        this.speedx=0;
-        this.speedy=Math.random()>0.5?1:-1;
-        this.maxframe=5;
-
-    }
-    update(deltatime)
-    {
-        super.update(deltatime);
-        if(this.y>this.game.height-this.height-this.groundmargin)this.speedy*=-1;
-        if(this.y<-this.height)this.markfordeletion=true;
-    }
-    draw(context)
-    {
-       super.draw(context);
-        context.beginPath();
-      context.moveTo(this.x+this.width/2,0);
-    context.lineTo(this.x+this.width/2,this.y+50);
-     context.stroke();
-    }
+  constructor(game) {
+    super();
+    this.game = game;
+    this.width = 120;
+    this.height = 144;
+    this.x = this.game.width;
+    this.y = Math.random() * this.game.height * 0.5;
+    this.image = document.getElementById("enemy_spider_big");
+    this.speedx = 0;
+    this.speedy = Math.random() > 0.5 ? 1 : -1;
+    this.maxframe = 5;
+  }
+  update(deltatime) {
+    super.update(deltatime);
+    if (this.y > this.game.height - this.height - this.groundmargin)
+      this.speedy *= -1;
+    if (this.y < -this.height) this.markfordeletion = true;
+  }
+  draw(context) {
+    super.draw(context);
+    context.beginPath();
+    context.moveTo(this.x + this.width / 2, 0);
+    context.lineTo(this.x + this.width / 2, this.y + 50);
+    context.stroke();
+  }
 }
