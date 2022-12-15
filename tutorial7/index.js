@@ -2,8 +2,10 @@
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  canvas.width = 600;
-  canvas.height = 600;
+  // canvas.width = 600;
+  // canvas.height = 600;
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
   let enemies = [];
   let score = 0;
   let gameOver = false;
@@ -311,6 +313,7 @@ window.addEventListener("load", function () {
     gameOver = false;
     animate(0);
   }
+  
   function togglefullscreen()
   {
     if(!document.fullscreenElement)
@@ -327,6 +330,26 @@ window.addEventListener("load", function () {
     }
     
   }
+function resize(width,height)
+{
+
+ width=window.innerWidth;
+height=window.innerHeight;
+  this.width = 200;
+  this.height = 200;
+  this.x = 0;
+  this.y = this.gameheight - this.height;
+  this.image = player;
+  this.framex = 0;
+  this.frameY = 0;
+  this.maxframe = 8;
+  this.speed = 0;
+  this.vy = 0;
+  this.weight = 1;
+  this.fps = 20;
+  this.frametimer = 0;
+  this.frameinterval = 1000 / this.fps;
+}
   fullscreen.addEventListener('click',togglefullscreen);
   togglefullscreen();
   const input = new Inputhandler();
@@ -353,4 +376,9 @@ window.addEventListener("load", function () {
     if (!gameOver) requestAnimationFrame(animate);
   }
   animate(0);
+  this.window.addEventListener('resize',function(){
+    this.canvas.width=window.innerWidth;
+    this.canvas.height=window.innerHeight;
+    resize(canvas.width,canvas.height);
+  })
 });

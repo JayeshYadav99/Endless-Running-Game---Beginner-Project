@@ -41,9 +41,9 @@ export class Player {
     this.currentstate.handleinput(input);
 
     this.x += this.speed;
-    if (input.indexOf("ArrowRight") > -1) {
+    if (input.indexOf("ArrowRight") > -1 && this.currentstate!=this.states[6]) {
       this.speed = this.maxspeed;
-    } else if (input.indexOf("ArrowLeft") > -1) {
+    } else if (input.indexOf("ArrowLeft") > -1 &&this.currentstate!=this.states[6]) {
       this.speed -= this.maxspeed;
     } else this.speed = 0;
     if (this.x < 0) this.x = 0;

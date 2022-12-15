@@ -9,7 +9,7 @@
         this.width=this.spritewidth*this.sizeModifer;
         this.height=this.spriteheight*this.sizeModifer;
         this.x=x-this.width*0.5;
-        this.y=y-this.width*0.5;
+        this.y=y-this.height*0.5;
         this.framex=0;
         this.maxframe=4;
         this.markfordeletion=false;
