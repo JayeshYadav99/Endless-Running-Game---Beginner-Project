@@ -6,7 +6,7 @@ import { UI } from "./ui.js";
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  canvas.width = 600;
+  canvas.width = 800;
   canvas.height = 600;
   class Game {
     constructor(width, height) {
@@ -101,7 +101,7 @@ window.addEventListener("load", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.update(deltatime);
     game.draw(ctx);
-    //if(!game.gameover)
+    
 
     requestAnimationFrame(animate);
   }

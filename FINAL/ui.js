@@ -19,6 +19,7 @@ export class UI{
         context.fillText('score: ' +this.game.score,20,50);
         context.font=50*0.7+'px'+this.fontfamily;
         context.fillText('Time:'+(this.game.time*0.001).toFixed(1),20,110);
+        // console.log(this.game.gameover);
         if(this.game.gameover)
         {
             context.textAlign='center';
