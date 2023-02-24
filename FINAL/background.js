@@ -108,7 +108,7 @@ export class Background {
     this.backgroundLayers.forEach((layer) => {
       layer.draw(context);
       
-      // audio.play();
+      audio.play();
     });
   }
 }

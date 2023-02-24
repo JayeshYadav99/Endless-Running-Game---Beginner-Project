@@ -24,16 +24,16 @@ export class UI{
         {
             context.textAlign='center';
             context.font=50*2+'px'+this.fontfamily;
-        if(this.game.score>5)
+        if(this.game.score>20)
         {
-            context.fillText('BOOYAH',this.game.width*0.5,this.game.height*0.5-20);
+            context.fillText('BOYS',this.game.width*0.5,this.game.height*0.5-20);
             context.font=50*0.7+'px'+this.fontfamily;
    
-            context.fillText('whooo',this.game.width*0.5,this.game.height*0.5);
+            context.fillText('______',this.game.width*0.5,this.game.height*0.5);
         }
         else {
-            context.fillText('kya hua',this.game.width*0.5,this.game.height*0.5-20);
-            context.font=50*0.7+'px'+this.fontfamily;
+            // context.fillText('kya hua',this.game.width*0.5,this.game.height*0.5-20);
+            // context.font=50*0.7+'px'+this.fontfamily;
             
         }
             

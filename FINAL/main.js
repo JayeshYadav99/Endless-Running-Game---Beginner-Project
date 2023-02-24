@@ -28,10 +28,10 @@ window.addEventListener("load", function () {
       this.collisions = [];
       this.maxparticles = 50;
       this.enemytimer = 0;
-      this.enemyinterval = 3000;
+      this.enemyinterval = 2500;
       this.debug = 0;
       this.score = 0;
-      this.fontcolor = "black";
+      this.fontcolor = "red";
       this.time = 0;
       this.gameover = false;
       this.maxtime = 10000;
