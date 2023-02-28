@@ -50,9 +50,9 @@ export class UI{
         {
             context.textAlign = "center";
             context.fillStyle = "black";
-            context.fillText("Women !!! Hahahaha,press CTRL+R", canvas.width / 2, 200);
+            context.fillText("Women !!! Hahahaha", canvas.width / 2, 200);
             context.fillStyle = "white";
-            context.fillText("Women !!! Hahahaha ,press CTRL+R", canvas.width / 2, 202);
+            context.fillText("Women !!! Hahahaha", canvas.width / 2, 202);
              
         }
         context.restore();
