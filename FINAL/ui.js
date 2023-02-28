@@ -20,25 +20,40 @@ export class UI{
         context.font=50*0.7+'px'+this.fontfamily;
         context.fillText('Time:'+(this.game.time*0.001).toFixed(1),20,110);
         // console.log(this.game.gameover);
-        if(this.game.gameover)
+        
+        if(!this.game.gameover)
         {
+            
+            
             context.textAlign='center';
             context.font=50*2+'px'+this.fontfamily;
-        if(this.game.score>20)
+        if(this.game.score===100)
         {
             context.fillText('BOYS',this.game.width*0.5,this.game.height*0.5-20);
             context.font=50*0.7+'px'+this.fontfamily;
    
             context.fillText('______',this.game.width*0.5,this.game.height*0.5);
+            //context.clearRect(this.game.width/2, this.game.height/2, this.game.width*0.5,this.game.height*0.5-20);
         }
-        else {
-            // context.fillText('kya hua',this.game.width*0.5,this.game.height*0.5-20);
-            // context.font=50*0.7+'px'+this.fontfamily;
+        else if(this.game.score===50){
+            context.fillText('kya hua',this.game.width*0.5,this.game.height*0.5-20);
+            context.font=50*0.7+'px'+this.fontfamily;
             
         }
-            
-   
+        else
+        {
+
+        }
            
+        }
+        else
+        {
+            context.textAlign = "center";
+            context.fillStyle = "black";
+            context.fillText("GAME OVER,press CTRL+R", canvas.width / 2, 200);
+            context.fillStyle = "white";
+            context.fillText("GAME OVER ,press CTRL+R", canvas.width / 2, 202);
+             
         }
         context.restore();
     }

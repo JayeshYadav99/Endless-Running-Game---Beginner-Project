@@ -34,7 +34,7 @@ window.addEventListener("load", function () {
       this.fontcolor = "red";
       this.time = 0;
       this.gameover = false;
-      this.maxtime = 10000;
+      this.maxtime = 100000;
 
       this.player.currentstate = this.player.states[0];
 
@@ -103,7 +103,7 @@ window.addEventListener("load", function () {
     game.draw(ctx);
     
 
-    requestAnimationFrame(animate);
+    if (!game.gameover) requestAnimationFrame(animate);
   }
   animate(0);
 });
