@@ -29,14 +29,14 @@ export class UI{
             context.font=50*2+'px'+this.fontfamily;
         if(this.game.score===100)
         {
-            context.fillText('BOYS',this.game.width*0.5,this.game.height*0.5-20);
+            context.fillText('Good Boys',this.game.width*0.5,this.game.height*0.5-20);
             context.font=50*0.7+'px'+this.fontfamily;
    
             context.fillText('______',this.game.width*0.5,this.game.height*0.5);
             //context.clearRect(this.game.width/2, this.game.height/2, this.game.width*0.5,this.game.height*0.5-20);
         }
         else if(this.game.score===50){
-            context.fillText('kya hua',this.game.width*0.5,this.game.height*0.5-20);
+            context.fillText('Boys!!!',this.game.width*0.5,this.game.height*0.5-20);
             context.font=50*0.7+'px'+this.fontfamily;
             
         }
@@ -50,9 +50,9 @@ export class UI{
         {
             context.textAlign = "center";
             context.fillStyle = "black";
-            context.fillText("GAME OVER,press CTRL+R", canvas.width / 2, 200);
+            context.fillText("Women !!! Hahahaha,press CTRL+R", canvas.width / 2, 200);
             context.fillStyle = "white";
-            context.fillText("GAME OVER ,press CTRL+R", canvas.width / 2, 202);
+            context.fillText("Women !!! Hahahaha ,press CTRL+R", canvas.width / 2, 202);
              
         }
         context.restore();
