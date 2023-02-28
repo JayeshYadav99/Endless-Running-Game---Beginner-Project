@@ -35,7 +35,7 @@ export class UI{
             context.fillText('______',this.game.width*0.5,this.game.height*0.5);
             //context.clearRect(this.game.width/2, this.game.height/2, this.game.width*0.5,this.game.height*0.5-20);
         }
-        else if(this.game.score===50){
+        else if(this.game.score>==50 || this.game.score<==70){
             context.fillText('Boys!!!',this.game.width*0.5,this.game.height*0.5-20);
             context.font=50*0.7+'px'+this.fontfamily;
             
