@@ -6,10 +6,11 @@ import { UI } from "./ui.js";
 window.addEventListener("load", function () {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
-  canvas.width = 800;
-  canvas.height = 600;
+  canvas.width = 1400;
+  canvas.height = 650;
   class Game {
     constructor(width, height) {
+      this.restart=false;
       this.width = width;
       //console.log("d",this.width);
       this.height = height;
@@ -42,7 +43,15 @@ window.addEventListener("load", function () {
     }
     update(deltatime) {
       this.time += deltatime;
-      if (this.time > this.maxtime) this.gameover = true;
+      if (this.time > this.maxtime)
+      {
+       
+         this.gameover = true;
+         
+          window.location.href='/';
+         
+    
+      console.log(this.gameover);}
       this.background.update();
       this.player.update(this.input.keys, deltatime);
       //handleenemies
@@ -71,6 +80,7 @@ window.addEventListener("load", function () {
         if (collision.markfordeletion) this.collisions.splice(index, 1);
       });
     }
+    
     draw(context) {
       this.background.draw(context);
       this.player.draw(context);
@@ -93,7 +103,15 @@ window.addEventListener("load", function () {
       this.enemies.push(new FlyingEnemy(this));
     }
   }
-  const game = new Game(canvas.width, canvas.height);
+  let game=null;
+  function startNewGame() {
+    // Create a new game instance
+    game = new Game(canvas.width, canvas.height);
+    requestAnimationFrame(animate);
+  }
+    
+  
+  game = new Game(canvas.width, canvas.height);
   let lasttime = 0;
   function animate(timeStamp) {
     const deltatime = timeStamp - lasttime;
@@ -103,7 +121,13 @@ window.addEventListener("load", function () {
     game.draw(ctx);
     
 
-    if (!game.gameover) requestAnimationFrame(animate);
+    if (!game.gameOver) {
+      requestAnimationFrame(animate);
+    } else {
+      // Game over, start a new game
+      startNewGame();
+    }
+    
   }
   animate(0);
 });

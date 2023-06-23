@@ -14,7 +14,11 @@ export class Inputhandler {
       ) {
         this.keys.push(e.key);
         console.log(this.keys);
-      } else if (e.key == "d") this.game.debug = !this.game.debug;
+      } else if (e.key == "d"){this.game.debug = !this.game.debug;} 
+      // else if(e.key=="Enter" && this.game.gameover)
+      // {
+      //   startNewGame();
+      // }
     });
     window.addEventListener("keyup", (e) => {
       if (

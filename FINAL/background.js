@@ -30,8 +30,8 @@ var audio = new Audio('Bones.mp3');
 export class Background {
   constructor(game) {
     this.game = game;
-    this.width = 1067;
-    this.height = 600;
+    this.width = game.width;
+    this.height = game.height;
     this.layer6image = document.getElementById("layer6");
     this.layer5image = document.getElementById("layer5");
     this.layer4image = document.getElementById("layer4");
