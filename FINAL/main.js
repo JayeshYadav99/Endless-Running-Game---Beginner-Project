@@ -48,7 +48,7 @@ window.addEventListener("load", function () {
        
          this.gameover = true;
          
-          window.location.href='/';
+          window.location.href='https://jayeshyadav99.github.io/Endless-Running-Game---Beginner-Project/';
          
     
       console.log(this.gameover);}
