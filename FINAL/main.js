@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
       this.fontcolor = "red";
       this.time = 0;
       this.gameover = false;
-      this.maxtime = 100000;
+      this.maxtime = 15000;
 
       this.player.currentstate = this.player.states[0];
 
@@ -47,7 +47,7 @@ window.addEventListener("load", function () {
       {
        
          this.gameover = true;
-         
+         startNewGame();
           window.location.href='https://jayeshyadav99.github.io/Endless-Running-Game---Beginner-Project/';
          
     
